@@ -1,3 +1,70 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Setting up the overall body background and text color */
+body {
+  @apply bg-background text-white; /* Applies the custom blue background and white text */
+}
+
+/* Styling for sidebar icons */
+.sidebar-icon {
+  @apply relative flex items-center justify-center h-12 w-12 mt-2 mb-2 mx-auto text-white hover:bg-gray-700 rounded-lg transition-colors duration-300 cursor-pointer;
+}
+
+/* Tooltip styling for sidebar icons */
+.sidebar-tooltip {
+  @apply absolute left-16 whitespace-nowrap bg-gray-900 text-white p-2 rounded-md opacity-0 scale-0 origin-left transition-all duration-300;
+}
+
+/* Custom class for the dotted background pattern */
+.dot-background {
+  background-image: radial-gradient(circle, #1e3a8a 20%, transparent 20%),
+                    radial-gradient(circle, transparent 75%, #1e3a8a 75%);
+  background-size: 10px 10px;
+  background-position: 0 0, 5px 5px;
+}
+/* Add this to your global.css or directly in your component's style */
+.icon-container {
+  display: inline-flex;
+  width: 40px;  
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.hover-bg\:github:hover {
+  background-color: #24292e	; /* GitHub Gray */
+}
+
+.hover-bg\:linkedin:hover {
+  background-color: #0077B5; /* LinkedIn Blue */
+}
+
+.hover-bg\:email:hover {
+  background-color: #EA4335; /* Email Red */
+}
+
+.hover-bg\:instagram:hover {
+  background-color: #E4405F; /* Instagram Pink */
+}
+
+.hover-bg\:tiktok:hover {
+  background-color: #000; 
+}
+.hover-bg\:discord:hover {
+  background-color: #7289d9;
+}
+
+.sidebar-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.sidebar-icon:hover .sidebar-tooltip {
+  visibility: visible;
+  opacity: 1;
+}

@@ -1,10 +1,5 @@
 import { z } from "zod";
-
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
 
 export const postRouter = createTRPCRouter({
   hello: publicProcedure
@@ -26,10 +21,11 @@ export const postRouter = createTRPCRouter({
       });
     }),
 
-  getLatest: protectedProcedure.query(async ({ ctx }) => {
+  // Change getLatest to a publicProcedure
+  getLatest: publicProcedure.query(async ({ ctx }) => {
+    // Remove the session-based filter
     const post = await ctx.db.post.findFirst({
       orderBy: { createdAt: "desc" },
-      where: { createdBy: { id: ctx.session.user.id } },
     });
 
     return post ?? null;
