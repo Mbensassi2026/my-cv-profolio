@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaGithub, FaLinkedinIn, FaEnvelope, FaInstagram, FaTiktok } from 'react-icons/fa';
 import { FaDiscord } from 'react-icons/fa'; 
-import Layout from '../_components/layout/Layout';
+import Layout from '@components/layout/Layout';
 
 const contactDetails = [
   { icon: <FaGithub />, url: 'https://github.com/Mbensassi2026', label: 'Github', hoverClass: 'hover-bg:github' },

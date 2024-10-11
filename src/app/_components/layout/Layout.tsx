@@ -1,29 +1,23 @@
-'use client'; 
-import React, { useState } from 'react';
-import Sidebar from './Sidebar';
-import Footer from '../Footer'; 
+'use client'
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to control the sidebar visibility
+import { useState } from 'react'
+import { Sidebar } from './Sidebar'
+import Footer from '../Footer'
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen); // Function to toggle the sidebar
+export function Layout({ children }: { children: React.ReactNode }) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen)
+  
   return (
-    <div className="flex flex-col min-h-screen">
-      <button
-        onClick={toggleSidebar}
-        className="p-2 text-3xl font-bold fixed top-0 left-5 z-50 bg-white text-black rounded-md shadow-lg"
-        style={{ height: '50px', width: '50px' }} // Ensuring the button is square
-      >
-        ☰
-      </button>
-      <div className="flex flex-grow">
-        <Sidebar isOpen={isSidebarOpen} />
-        <div className="ml-16 w-full p-8 bg-background text-white">
+    <div className="flex flex-col min-h-screen bg-background text-foreground">
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      <div className="flex-grow">
+        <main className={`p-8 transition-all duration-300 ease-in-out ${isSidebarOpen ? 'ml-16' : 'ml-0'}`}>
           {children}
-        </div>
+        </main>
       </div>
-      <Footer /> {/* Footer will always be at the bottom */}
+      <Footer />
     </div>
-  );
+  )
 }

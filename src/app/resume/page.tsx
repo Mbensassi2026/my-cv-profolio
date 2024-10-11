@@ -1,18 +1,14 @@
-// Assuming a correct path from this file to where Layout is defined
+'use client';
+
 import Layout from '../_components/layout/Layout';
 
-// Import necessary React hooks
 import { useState, useEffect } from 'react';
 
-// Define the props expected by the ResumePage component, if any
-interface ResumePageProps {
-    // Define any props here if needed
-}
+interface ResumePageProps {}
 
 const ResumePage: React.FC<ResumePageProps> = () => {
-    const [isLoading, setIsLoading] = useState(true); // State to manage loading effect
+    const [isLoading, setIsLoading] = useState(true);
 
-    // Simulate loading effect
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsLoading(false);
@@ -20,7 +16,6 @@ const ResumePage: React.FC<ResumePageProps> = () => {
         return () => clearTimeout(timer);
     }, []);
 
-    // Content of the resume page
     return (
         <Layout>
             <div className="container mx-auto px-4 py-8 min-h-screen">
@@ -32,8 +27,8 @@ const ResumePage: React.FC<ResumePageProps> = () => {
                             </p>
                             <div className="mt-4">
                                 <button
-                                    className="bg-purple-900 hover:bg-purple-800 text-white py-2 px-4 rounded inline-flex items-center"
-                                    onClick={() => window.open('your_resume_link.pdf', '_blank')}
+                                  className="bg-purple-900 hover:bg-purple-800 text-white py-2 px-4 rounded inline-flex items-center"
+                                  onClick={() => window.open('your_resume_link.pdf', '_blank')}
                                 >
                                     Download PDF
                                 </button>
@@ -42,20 +37,20 @@ const ResumePage: React.FC<ResumePageProps> = () => {
                         {isLoading ? (
                             <div className="animate-pulse flex space-x-4">
                                 <div className="flex-1 space-y-4 py-1">
-                                    <div className="h-4 bg-purple-300 rounded w-3/4"></div>
+                                    <div className="h-4 bg-purple-300 rounded w-3/4"/>
                                     <div className="space-y-2">
-                                        <div className="h-4 bg-purple-300 rounded"></div>
-                                        <div className="h-4 bg-purple-300 rounded w-5/6"></div>
+                                        <div className="h-4 bg-purple-300 rounded"/>
+                                        <div className="h-4 bg-purple-300 rounded w-5/6"/>
                                     </div>
                                 </div>
                             </div>
                         ) : (
                             <iframe
-                                src="your_resume_link.pdf"
-                                style={{ height: '500px', width: '100%' }}
-                                frameBorder="0"
-                                title="Your Resume"
-                            ></iframe>
+                              src="your_resume_link.pdf"
+                              style={{ height: '500px', width: '100%' }}
+                              frameBorder="0"
+                              title="Your Resume"
+                            />
                         )}
                     </div>
                 </div>

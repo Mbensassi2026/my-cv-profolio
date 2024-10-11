@@ -1,4 +1,4 @@
-import Layout from '../_components/layout/Layout';
+import Layout from '@components/layout/Layout';
 import Image from 'next/image';
 import { FaGithub, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
 

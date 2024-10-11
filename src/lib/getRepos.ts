@@ -4,11 +4,10 @@ const endpoint = 'https://api.github.com/graphql';
 
 const graphQLClient = new GraphQLClient(endpoint, {
   headers: {
-    authorization: `Bearer ${process.env.GITHUB_TOKEN}`,  // Use the environment variable
+    authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
   },
 });
 
-// Define the shape of the data you're expecting from the GitHub API
 interface Repo {
   id: string;
   name: string;
@@ -61,7 +60,49 @@ const query = gql`
   }
 `;
 
-export default async function getRepos(): Promise<Repo[]> {
+const recentQuery = gql`
+  {
+    user(login: "Mbensassi2026") {
+        repositories(first: 100, orderBy: { field: CREATED_AT, direction: DESC }) {
+        nodes {
+          id
+          name
+          description
+          url
+          stargazerCount
+          forkCount
+          primaryLanguage {
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
+
+export async function getProjects(): Promise<Repo[]> { 
+  try {
+    const data = await graphQLClient.request<GitHubResponse>(recentQuery);
+
+    console.log("GitHub Response Data:", data);
+
+    return data.user.repositories.nodes.map((repo) => ({
+      id: repo.id,
+      name: repo.name,
+      description: repo.description,
+      html_url: repo.url,
+      stargazers_count: repo.stargazerCount,
+      forks_count: repo.forkCount,
+      primaryLanguage: repo.primaryLanguage,
+    }));
+  } catch (error) {
+    console.error("Error fetching repos:", error);
+    throw new Error("Failed to fetch recent repositories");
+  }
+}
+
+export async function getRepos(): Promise<Repo[]> {
   try {
     const data = await graphQLClient.request<GitHubResponse>(query);
 

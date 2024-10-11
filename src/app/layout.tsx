@@ -1,4 +1,5 @@
-import '../styles/globals.css'; // Ensure global styles are imported
+import '~/styles/globals.css';
+import { Layout } from '@components/layout/Layout';
 
 export const metadata = {
   title: 'My Portfolio',
@@ -13,7 +14,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-background text-white min-h-screen">
-        {children}
+        <Layout>
+          {children}
+        </Layout>
       </body>
     </html>
   )

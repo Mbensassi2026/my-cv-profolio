@@ -22,13 +22,13 @@
     "baseUrl": ".",
     "paths": {
       "~/*": [
-        "src/*"
+        "./src/*"
       ],
       "@components/*": [
-        "src/app/_components/*"
+        "./src/app/_components/*"
       ],
       "@pages/*": [
-        "src/app/*"
+        "./src/app/*"
       ]
     },
     "typeRoots": [

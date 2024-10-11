@@ -1,38 +1,36 @@
-'use client'; // This directive ensures the component uses client-side features
+'use client';
 
 import React, { useState, useEffect } from 'react';
-import PinnedRepos from './_components/github/PinnedRepos';
-import getRepos from '../lib/getRepos';
-import Layout from './_components/layout/Layout';
+import PinnedRepos from '@components/github/PinnedRepos';
+import { getRepos } from '~/lib/getRepos';
 import Image from 'next/image';
 import { Typewriter } from 'react-simple-typewriter';
 
-// Assuming Repo is a type that looks something like this:
 type Repo = {
   id: number;
   name: string;
   description: string;
-  // Add other necessary fields
 };
 
 export default function Home() {
-  const [pinnedRepos, setPinnedRepos] = useState<Repo[]>([]); // Use useState with the correct type
+  const [pinnedRepos, setPinnedRepos] = useState<Repo[]>([]);
 
   useEffect(() => {
     async function fetchRepos() {
-      const repos: Repo[] = await getRepos(); // Assume getRepos() correctly returns Repo[]
+      // @ts-nocheck
+      const repos = await getRepos() as any[];
       setPinnedRepos(repos);
     }
     fetchRepos();
   }, []);
 
   return (
-    <Layout>
+    <>
       <div className="flex flex-col items-center justify-center min-h-screen">
         <section className="flex flex-col md:flex-row w-full max-w-4xl justify-center items-center mb-20 mt-16 gap-8 text-center">
           <div>
             <h1 className="text-4xl font-bold mb-2 text-primary">
-              Hi, I'm{' '}
+              {'Hi, I\'m'}
               <span className="text-primary">
                 <Typewriter
                   words={["Mohammed Bensassi", " a  Full Stack Developer", " a Software Developer"]}
@@ -64,6 +62,6 @@ export default function Home() {
           <PinnedRepos pinnedRepos={pinnedRepos} />
         </section>
       </div>
-    </Layout>
+    </>
   );
 }
